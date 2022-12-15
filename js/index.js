@@ -24,15 +24,24 @@ function filtrarporcadaatributo(atributo,valor = ""){
 }
 
 function ordenarporatributo(atributo){
-    return products.sort(function(a,b){
-        if (a[atributo] < b[atributo] ) {
-            return -1;
-        }
-        if (a[atributo] > b[atributo] ) {
-            return 1;
-        }
-        return 0;
-    })
+    // return products.sort(function(a,b){
+    //     if (a[atributo] < b[atributo] ) {
+    //         return -1;
+    //     }
+    //     if (a[atributo] > b[atributo] ) {
+    //         return 1;
+    //     }
+    //     return 0;
+    // })
+
+    if(typeof products[0][atributo] === "string"){
+        return products.sort((a, b) => {return a[atributo].localeCompare(b[atributo])})
+    } else if(typeof products[0][atributo] === "number"){
+        return products.sort((a, b) => {return a[atributo] - b[atributo]})
+    } else {
+        return 'No puedo ordernar ese tipo de dato.'
+    }
+
 }
 
 function imprimirobjeto(){
@@ -90,8 +99,8 @@ function borrar(atributo,valor){
 }
 
 // imprimirobjeto()
-console.log(filtrarporcadaatributo("name","cellphone"))
-// console.log(ordenarporatributo("name"))
+// console.log(filtrarporcadaatributo("name","cellphone"))
+console.log(ordenarporatributo("brand"))
 // console.log(agregandoprecio())
 // console.log(filtrarporprecio())
 // console.log(agregarnuevoelemento())
